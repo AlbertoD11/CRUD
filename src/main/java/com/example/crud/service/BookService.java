@@ -8,8 +8,12 @@ import java.util.Optional;
 
 public interface BookService {
     List<BookEntity> getAllBooks();
+
     Optional<BookEntity> getBookById(Long id);
+
     BookEntity createBook(BookEntity book);
+
     BookEntity updateBook(Long id, BookEntity updatedBook);
+
     HashMap<String, String> deleteBook(Long id);
 }

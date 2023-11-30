@@ -18,10 +18,10 @@ public class UserServiceImpl implements UserService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
-
-    private final UserRepository userRepository;
-
     @Autowired
+    private UserRepository userRepository;
+
+
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
 
@@ -87,10 +87,6 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Error deleting user");
         }
     }
-
-
-
-
 
 }
 

@@ -2,11 +2,8 @@ package com.example.crud.persistence.entity;
 
 import jakarta.persistence.*;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Entity
-@Table(name = "libro")
+@Table(name = "libros")
 public class BookEntity {
 
     @Id
@@ -16,8 +13,14 @@ public class BookEntity {
     private String titulo;
     private String descripcion;
 
-
     public BookEntity() {
+
+    }
+
+    public BookEntity(Long id, String titulo, String descripcion) {
+        this.id = id;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
     }
 
     public Long getId() {

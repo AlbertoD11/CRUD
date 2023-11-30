@@ -16,20 +16,21 @@ public class BookServiceImpl implements BookService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
-    private final BookRepository bookRepository;
-
     @Autowired
+    private BookRepository bookRepository;
+
     public BookServiceImpl(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
+
 
     @Override
     public List<BookEntity> getAllBooks() {
         try {
             return bookRepository.findAll();
         } catch (Exception e) {
-            LOGGER.error("Error while fetching all users: {}", e.getMessage());
-            throw new RuntimeException("Error fetching users");
+            LOGGER.error("Error while fetching all books: {}", e.getMessage());
+            throw new RuntimeException("Error fetching books");
         }
     }
 
@@ -38,8 +39,8 @@ public class BookServiceImpl implements BookService {
         try {
             return bookRepository.findById(id);
         } catch (Exception e) {
-            LOGGER.error("Error while fetching user by ID: {}", e.getMessage());
-            throw new RuntimeException("Error fetching user by ID");
+            LOGGER.error("Error while fetching book by ID: {}", e.getMessage());
+            throw new RuntimeException("Error fetching book by ID");
         }
     }
 
@@ -48,26 +49,27 @@ public class BookServiceImpl implements BookService {
         try {
             return bookRepository.save(book);
         } catch (Exception e) {
-            LOGGER.error("Error while creating user: {}", e.getMessage());
-            throw new RuntimeException("Error creating user");
+            LOGGER.error("Error while creating book: {}", e.getMessage());
+            throw new RuntimeException("Error creating book");
         }
     }
+
 
     @Override
     public BookEntity updateBook(Long id, BookEntity updatedBook) {
         try {
-            BookEntity existingUser = bookRepository.findById(id).orElse(null);
-            if (existingUser != null) {
-                existingUser.setId(updatedBook.getId());
-                existingUser.setTitulo(updatedBook.getTitulo());
-                existingUser.setDescripcion(updatedBook.getDescripcion());
+            BookEntity existingBook = bookRepository.findById(id).orElse(null);
+            if (existingBook != null) {
+                existingBook.setId(updatedBook.getId());
+                existingBook.setTitulo(updatedBook.getTitulo());
+                existingBook.setDescripcion(updatedBook.getDescripcion());
 
-                return bookRepository.save(existingUser);
+                return bookRepository.save(existingBook);
             }
-            throw new RuntimeException("User not found");
+            throw new RuntimeException("Book not found");
         } catch (Exception e) {
-            LOGGER.error("Error while updating user: {}", e.getMessage());
-            throw new RuntimeException("Error updating user");
+            LOGGER.error("Error while updating Book: {}", e.getMessage());
+            throw new RuntimeException("Error updating Book");
         }
     }
 
@@ -75,12 +77,12 @@ public class BookServiceImpl implements BookService {
     public HashMap<String, String> deleteBook(Long id) {
         try {
             HashMap<String, String> response = new HashMap<>();
-            response.put("message", "User deleted succesfully!");
+            response.put("message", "Book deleted succesfully!");
             bookRepository.deleteById(id);
             return response;
         } catch (Exception e) {
-            LOGGER.error("Error while deleting user: {}", e.getMessage());
-            throw new RuntimeException("Error deleting user");
+            LOGGER.error("Error while deleting book: {}", e.getMessage());
+            throw new RuntimeException("Error deleting book");
         }
     }
 
